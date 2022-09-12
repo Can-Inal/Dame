@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
 
   board.PrintBoard();
   
-  std::cout << "Nessty seni cok seviyorum" << std::endl;
 
   return 0;
 }
