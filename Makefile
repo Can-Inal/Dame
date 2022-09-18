@@ -1,12 +1,14 @@
-
-Dame : main.o board.o
-	g++ -o Dame main.o board.o
+Dame : main.o board.o piece.o
+	g++ -o Dame main.o board.o piece.o
 
 main.o : main.cpp
-	g++ -c main.cpp
+	g++ -c -std=c++1z main.cpp
 
 board.o : board.cpp
-	g++ -c board.cpp
+	g++ -c -std=c++1z board.cpp
+
+piece.o : piece.cpp
+	g++ -c -std=c++1z piece.cpp
 
 . PHONY : install
 install : executable
