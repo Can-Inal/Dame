@@ -23,7 +23,8 @@ class Piece {
     int getX() const;
     int getY() const;
     void setPlace(const int& x, const int& y);
-    int getInfo() const;    
+    int getInfo() const; 
+    void move(const int& x, const int& y);    
     bool isDame() {return _Dame;}
     void setDame(Piece& piece);
     

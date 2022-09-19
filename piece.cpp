@@ -3,12 +3,6 @@
 Piece::Piece(const int& x, const int& y, const int& info, const bool& Dame)
   : _x(x) , _y(y), _info(info), _Dame(Dame) {}
 
-Piece::~Piece() noexcept{
-  _x = 99;
-  _y = 99;
-  _info = 99;
-}
-
 int Piece::getX() const {
   return _x;
 }

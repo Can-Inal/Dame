@@ -12,12 +12,12 @@ enum player : int {
 class Player {
 
 public:
-    Player(const int& color, const int& PieceAmount);
+    Player(const int& color, const int& PieceAmount, const bool& turn);
     int getAmount() const;
     void setAmount(const int& var);
     int getColor() const;
     bool loser();
-    bool setTurn(const bool& turn);
+    void setTurn(const bool& turn);
     bool getTurn() { return _Turn; }
 private:
     const int _color;

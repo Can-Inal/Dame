@@ -14,8 +14,9 @@ class Board {
 
     void PrintBoard();
     
-    // Bool function to determine if the move is valid
-    void move(Piece& piece,const int& xTarget,const int& yTarget);
+    // move functions
+    void move(Piece& piece,const int& xTarget,const int& yTarget, Player& white, Player& black);
+    void moveDame(Piece& piece, const int& xTarget, const int& yTarget, Player& white, Player& black);
 
     // Bool function to determine if the square occupied by any piece
     bool isOccupied(const int& x_cord, const int& y_cord);
@@ -25,7 +26,11 @@ class Board {
 
     std::vector<Piece> collection;
 
+    bool getValid();
+    void setValid(const bool& valid);
+
   private:
+    bool _Valid;
     int board[8][8];
   
 };

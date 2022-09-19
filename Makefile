@@ -1,5 +1,5 @@
-Dame : main.o board.o piece.o
-	g++ -o Dame main.o board.o piece.o
+Dame : main.o board.o piece.o player.o game.o
+	g++ -o Dame main.o board.o piece.o player.o game.o
 
 main.o : main.cpp
 	g++ -c -std=c++1z main.cpp
@@ -9,6 +9,12 @@ board.o : board.cpp
 
 piece.o : piece.cpp
 	g++ -c -std=c++1z piece.cpp
+
+player.o : player.cpp	
+	g++ -c -std=c++1z player.cpp
+
+game.o : game.cpp
+	g++ -c -std=c++1z game.cpp
 
 . PHONY : install
 install : executable

@@ -1,7 +1,7 @@
 #include "player.hpp"
 
-Player::Player(const int& color, const int& PieceAmount)
-    : _color(color), _PieceAmount(PieceAmount) {}
+Player::Player(const int& color, const int& PieceAmount, const bool& turn)
+    : _color(color), _PieceAmount(PieceAmount), _Turn(turn) {}
 
 int Player::getAmount() const{
     return _PieceAmount;
@@ -21,9 +21,11 @@ bool Player::loser(){
     if(_PieceAmount == 0){
         _Lost = true;
         return _Lost;
+    }else {
+      return false;
     }
 }
 
-bool Player::setTurn(const bool& turn) {
+void Player::setTurn(const bool& turn) {
     _Turn = turn;
 }
