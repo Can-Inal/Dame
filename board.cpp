@@ -142,7 +142,7 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
     int xNext;
     int yNext;
 
-    if(Board::board[xEnemy][yEnemy] == Stat::white_Stein || Board::board[xEnemy][yEnemy] == Stat::white_Dame Board::board[xEnemy][yEnemy] == Stat::white_empty ||Board::board[xEnemy][yEnemy] == Stat::black_empty){
+    if(Board::board[xEnemy][yEnemy] == Stat::white_Stein || Board::board[xEnemy][yEnemy] == Stat::white_Dame || Board::board[xEnemy][yEnemy] == Stat::white_empty ||Board::board[xEnemy][yEnemy] == Stat::black_empty){
       std::cout << "you cant jump over this piece!!" << std::endl;
       setValid(false);
     }
@@ -192,7 +192,7 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
     int xNext;
     int yNext;
 
-    if(Board::board[xEnemy][yEnemy] == Stat::black_Stein || Board::board[xEnemy][yEnemy] == Stat::black_Dame Board::board[xEnemy][yEnemy] == Stat::white_empty ||Board::board[xEnemy][yEnemy] == Stat::black_empty){
+    if(Board::board[xEnemy][yEnemy] == Stat::black_Stein || Board::board[xEnemy][yEnemy] == Stat::black_Dame || Board::board[xEnemy][yEnemy] == Stat::white_empty ||Board::board[xEnemy][yEnemy] == Stat::black_empty){
       std::cout << "you cant jump over this piece!!" << std::endl;
       setValid(false);
     }
