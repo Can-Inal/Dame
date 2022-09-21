@@ -54,7 +54,7 @@ void Game::gameLoop() {
             board.Update(board.collection[piece]);
             system("cls");
           } else
-            std::cout << "wrong type!!" << std::endl;
+            std::cout << "Wrong type!!!" << std::endl;
         }
     }
 }
