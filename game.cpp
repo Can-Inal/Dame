@@ -31,6 +31,7 @@ void Game::gameLoop() {
               black.setTurn(false);
             }
             board.Update(board.collection[piece]);
+            system("cls");
           } else
             std::cout << "wrong type!!" << std::endl;
         }else if (black.getTurn()){
@@ -51,6 +52,7 @@ void Game::gameLoop() {
               white.setTurn(false);
             }
             board.Update(board.collection[piece]);
+            system("cls");
           } else
             std::cout << "wrong type!!" << std::endl;
         }
