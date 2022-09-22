@@ -24,9 +24,5 @@ install : executable
 
 . PHONY : clean
 clean :
-	del main.o
-	del board.o
-	del piece.o
-	del player.o
-	del game.o
+	del *.o
 	del Dame.exe
