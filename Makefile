@@ -1,3 +1,6 @@
+UNAME := $(shell uname)
+
+
 Dame : main.o board.o piece.o player.o game.o
 	g++ -o Dame main.o board.o piece.o player.o game.o
 
@@ -21,12 +24,16 @@ install : executable
 	sudo cp ./Dame/bin
 	sudo chmod 555 /bin/Dame
 	sudo chown root:root /bin/Dame
+ifeq ($(UNAME), Linux)
+	. PHONY : clean
+	clean:
+		rm *.o
+		rm Dame
+endif
 
-. PHONY : clean
-clean :
-	del main.o
-	del board.o
-	del piece.o
-	del player.o
-	del game.o
-	del Dame.exe
+ifeq ($(UNAME), Windows_NT)
+	. PHONY : clean
+	clean :
+		del *.o
+		del Dame.exe
+endif
