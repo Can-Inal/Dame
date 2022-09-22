@@ -62,57 +62,217 @@ void Board::moveDame(Piece& piece, const int& xTarget, const int& yTarget, Playe
   const int piece_info = piece.getInfo();
   int x = xStart;
   int y = yStart;
+  int xTarg = xTarget;
+  int yTarg = yTarget;
  
   if(abs(xTarget-xStart) == abs(yTarget-yStart)){
-
+  
+    // The code begins here for white king
+    // ----------------White King--------------
     if(piece_info == Stat::white_Dame){
-      int xNew;
-      int yNew;
-      while(x != xTarget && y != yTarget){
-        x++;
-        y++;
-        if(Board::board[x][y] == Stat::black_Dame || Board::board[x][y] == Stat::black_Stein){
-          int checkX = x++; 
-          int checkY = y++;
-          if(Board::board[checkX][checkY] == Stat::black_empty){
-            piece.setPlace(checkX, checkY);
-            moveDame(piece, xTarget, yTarget, white, black);
-          } else {
-            std::cout << "not allowed to play!\n" << std::endl;
-            std::cout << "xNew: ";
-            std::cin >> xNew;
-            std::cout << "yNew; ";
-            std::cin >> yNew;
-            moveDame(piece, xNew, yNew, white, black);
+
+      // White king right bottom corner direction
+      if(xTarget > x && yTarget > y){
+        while(xTarg != x){
+          xTarg--;
+          yTarg--;
+          if(Board::board[xTarg][yTarg] == Stat::black_Stein){
+            if(Board::board[xTarg+1][yTarg+1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              Board::board[xStart][yStart] == 4;
+              piece.setPlace(xTarget, yTarget);
+              setValid(true);
+            }
           }
         }
-      Board::setValid(true);
       }
-    } 
-    else if(piece_info == Stat::black_Dame){
-      int xNew;
-      int yNew;
-      while(x != xTarget && y != yTarget){
-        x++;
-        y++;
-        if(Board::board[x][y] == Stat::white_Dame || Board::board[x][y] == Stat::white_Stein){
-          int checkX = x++; 
-          int checkY = y++;
-          if(Board::board[checkX][checkY] == Stat::black_empty){
-            piece.setPlace(checkX, checkY);
-            moveDame(piece, xTarget, yTarget, white, black);
-          } else {
-            std::cout << "not allowed to play!\n" << std::endl;
-            std::cout << "xNew: ";
-            std::cin >> xNew;
-            std::cout << "yNew; ";
-            std::cin >> yNew;
-            moveDame(piece, xNew, yNew, white, black);
+
+
+
+      // White king left bottom corner direction
+      else if(xTarget > x && yTarget < y){
+        while(xTarg != x){
+          xTarg--;
+          yTarg++;
+          if(Board::board[xTarg][yTarg] == Stat::black_Stein){
+            if(Board::board[xTarg+1][yTarg-1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              setValid(true);
+            }
           }
         }
-      Board::setValid(true);
       }
+
+     // White king right top corner direction
+      else if(xTarget < x && yTarget > y){
+        while(xTarg != x){
+          xTarg++;
+          yTarg--;
+          if(Board::board[xTarg][yTarg] == Stat::black_Stein){
+            if(Board::board[xTarg-1][yTarg+1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              std::cout << "xStart, yStart: " << Board::board[xStart][yStart] << std::endl;
+              setValid(true);
+            }
+          }
+        }
+      }
+
+
+      // White king left top corner direction
+      else if(xTarget < x && yTarget < y){
+        while(xTarg != x){
+          xTarg++;
+          yTarg++;
+          if(Board::board[xTarg][yTarg] == Stat::black_Stein){
+            if(Board::board[xTarg-1][yTarg-1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              std::cout << "xStart, yStart: " << Board::board[xStart][yStart] << std::endl;
+              setValid(true);
+            }
+          }
+        }
+      }
+
+
+
+
     }
+    
+    // The code begins here for Black king
+    // ----------------Black King--------------
+    else if(piece_info == Stat::black_Dame){
+
+
+         // Black king right bottom corner direction
+      if(xTarget > x && yTarget > y){
+        while(xTarg != x){
+          xTarg--;
+          yTarg--;
+          if(Board::board[xTarg][yTarg] == Stat::white_Stein){
+            if(Board::board[xTarg+1][yTarg+1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              black.setAmount(1);
+              Board::board[xStart][yStart] = Stat::black_empty;
+              piece.setPlace(xTarget, yTarget);
+              setValid(true);
+            }
+          }
+        }
+      }
+
+
+
+      // Black king left bottom corner direction
+      else if(xTarget > x && yTarget < y){
+        while(xTarg != x){
+          xTarg--;
+          yTarg++;
+          if(Board::board[xTarg][yTarg] == Stat::white_Stein){
+            if(Board::board[xTarg+1][yTarg-1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              std::cout << "xStart, yStart: " << Board::board[xStart][yStart] << std::endl;
+              setValid(true);
+            }
+          }
+        }
+      }
+
+     // Black king right top corner direction
+      else if(xTarget < x && yTarget > y){
+        while(xTarg != x){
+          xTarg++;
+          yTarg--;
+          if(Board::board[xTarg][yTarg] == Stat::white_Stein){
+            if(Board::board[xTarg-1][yTarg+1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              std::cout << "xStart, yStart: " << Board::board[xStart][yStart] << std::endl;
+              setValid(true);
+            }
+          }
+        }
+      }
+
+
+      // Black king left top corner direction
+      else if(xTarget < x && yTarget < y){
+        while(xTarg != x){
+          xTarg++;
+          yTarg++;
+          if(Board::board[xTarg][yTarg] == Stat::white_Stein){
+            if(Board::board[xTarg-1][yTarg-1] == Stat::black_empty){
+              for(auto it : collection){
+                if(it.getX() == xTarg && it.getY() == yTarg){
+                  Board::board[xTarg][yTarg] = Stat::black_empty; // set the square of possible black piece free
+                  it.setPlace(99,99);
+                }
+              }
+              Board::board[xStart][yStart] = Stat::black_empty;
+              black.setAmount(1);
+              piece.setPlace(xTarget, yTarget);
+              std::cout << "xStart, yStart: " << Board::board[xStart][yStart] << std::endl;
+              setValid(true);
+            }
+          }
+        }
+      }
+
+
+    }
+
+
 
   }
 }
@@ -122,7 +282,7 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
   const int xStart = piece.getX();
   const int yStart = piece.getY();
   const int piece_info = piece.getInfo();
-  
+
   if(isOccupied(xTarget, yTarget)){
     std::cout << "This place is occupied!!" << std::endl;
     setValid(false);
@@ -148,14 +308,15 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
     }
     else if(Board::board[xEnemy][yEnemy] == Stat::black_Stein || Board::board[xEnemy][yEnemy] == Stat::black_Dame){
       Board::board[xStart][yStart] = Stat::black_empty;  // set the square free
-      piece.setPlace(xTarget,yTarget); // new location of that piece
-      
+      piece.setPlace(xTarget,yTarget);  // new location of that piece
+      if(xTarget == 0)
+        piece.setDame(piece);
 
-      if((Board::board[xTarget-1][yTarget-1] == Stat::black_Stein || Board::board[xTarget-1][yTarget-1] == Stat::black_Dame) && !isOccupied(xTarget+2,yTarget-2))
+      if((Board::board[xTarget-1][yTarget-1] == Stat::black_Stein || Board::board[xTarget-1][yTarget-1] == Stat::black_Dame) && !isOccupied(xTarget-2,yTarget-2))
       {
-        move(piece, xTarget-2, yTarget-2, white, black);
+        move(piece, xTarget-2, yTarget-2, white, black); 
       }
-      else if((Board::board[xTarget-1][yTarget+1] == Stat::black_Stein || Board::board[xTarget+1][yTarget+1] == Stat::black_Dame)&&!isOccupied(xTarget-2,yTarget+2))
+      else if((Board::board[xTarget-1][yTarget+1] == Stat::black_Stein || Board::board[xTarget-1][yTarget+1] == Stat::black_Dame)&&!isOccupied(xTarget-2,yTarget+2))
       {
         move(piece, xTarget-2, yTarget+2, white, black);
       }
@@ -183,7 +344,6 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
   else if(piece_info == Stat::black_Stein && xTarget - xStart == 1 && abs(yTarget - yStart) == 1 ) {
     Board::board[xStart][yStart] = Stat::black_empty;
     piece.setPlace(xTarget,yTarget);
-    setValid(true);
   }
   else if(piece_info == Stat::black_Stein && xTarget - xStart == 2 && abs(yTarget - yStart) == 2 ){
     int xEnemy = (xStart + xTarget)/2; // x loc of possible white piece
@@ -199,15 +359,17 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
     else if(Board::board[xEnemy][yEnemy] == Stat::white_Stein || Board::board[xEnemy][yEnemy] == Stat::white_Dame){
       Board::board[xStart][yStart] = Stat::black_empty;  // set the square free
       piece.setPlace(xTarget,yTarget);  // new location of that piece
+      if(xTarget == 7)
+        piece.setDame(piece);
 
       if((Board::board[xTarget+1][yTarget-1] == Stat::white_Stein || Board::board[xTarget+1][yTarget-1] == Stat::white_Dame) && !isOccupied(xTarget+2, yTarget-2))
       {
-          move(piece, xTarget+2, yTarget-2, white, black);
+        move(piece, xTarget+2, yTarget-2, white, black);
       }
 
       else if((Board::board[xTarget+1][yTarget+1] == Stat::white_Stein || Board::board[xTarget+1][yTarget+1] == Stat::white_Dame)&&!isOccupied(xTarget+2, yTarget+2))
       {
-          move(piece, xTarget+2, yTarget+2, white, black);
+        move(piece, xTarget+2, yTarget+2, white, black);
       }
 
       else if(Board::board[xTarget+3][yTarget-3] == Stat::white_Stein || Board::board[xTarget+3][yTarget-3] == Stat::white_Dame || Board::board[xTarget+3][yTarget+3] == Stat::white_Stein || Board::board[xTarget+3][yTarget+3] == Stat::white_Dame) 
@@ -231,11 +393,12 @@ void Board::move(Piece& piece, const int& xTarget, const int& yTarget, Player& w
       }
        setValid(true);
     }
+  }else if((xTarget == 0 || xTarget == 7) && (piece_info == Stat::white_Stein || piece_info == Stat::black_Stein)){
+    piece.setDame(piece);
+    Update(piece);
   }
-  if(piece.getInfo() == Stat::black_Stein && piece.getX() == 7){
-    piece.setDame(piece);
-  } else if(piece.getInfo() == Stat::white_Stein && piece.getX() == 0) {
-    piece.setDame(piece);
+  else {
+    std::cout << "not possible! " << std::endl;
   }
 }
 

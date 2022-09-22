@@ -21,12 +21,12 @@ int Piece::getInfo() const {
 }
 
 void Piece::setDame(Piece& piece) {
-  if(piece.getInfo() == Stat::white_Stein && piece.getX() == 1){
-    _Dame = true;
-    _info = Stat::white_Dame;
-  } else if(piece.getInfo() == Stat::black_Stein && piece.getX() == 8){
-    _Dame = true;
-    _info = Stat::black_Dame;
+  if(piece.getInfo() == Stat::white_Stein && piece.getX() == 0){
+    piece._Dame = true;
+    piece._info = Stat::white_Dame;
+  } else if(piece.getInfo() == Stat::black_Stein && piece.getX() == 7){
+    piece._Dame = true;
+    piece._info = Stat::black_Dame;
   }
 }
 
