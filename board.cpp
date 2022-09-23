@@ -435,9 +435,4 @@ void Board::Update(Piece& piece){
 }
 
 
-/* 
-  TO DO LIST
-  1- Spielende => gameLoop.hpp kann benotigt werden
-  2- Wer ist dran ? => Player.hpp auch fur Anzahl von Steinen bei einem Spieler
-  3- kann der Stein noch weiter springen ?
-*/
+
