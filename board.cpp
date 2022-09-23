@@ -86,7 +86,7 @@ void Board::moveDame(Piece& piece, const int& xTarget, const int& yTarget, Playe
               }
               Board::board[xStart][yStart] = Stat::black_empty;
               black.setAmount(1);
-              Board::board[xStart][yStart] == 4;
+              Board::board[xStart][yStart] = Stat::black_empty;
               piece.setPlace(xTarget, yTarget);
               setValid(true);
             }
