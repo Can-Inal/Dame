@@ -1,4 +1,5 @@
 #include "board.hpp"
+#include "piece.hpp"
 
 
 Board::Board(){
@@ -38,16 +39,48 @@ Board::Board(){
 
 void Board::PrintBoard(){
 
-  for(int x = 0; x<8; x++){
-    for(int y = 0; y<8; y++){
-      std::cout << board[x][y];
-      std::cout << "---";
-    }
-    std::cout << std::endl;
+  int y = 0;
+  for(int x = 0; x< 8; x++){
+        for(int i = 0; i<4; i++) {
+            if(x%2 == 0){
+                for(int k = 0; k<4; k++){
+                  if(i==0 && k==0){
+                    printf("\033[30;47m%d       \033[0m", abs(x-8)); // White
+                    printf("\033[47;40m        \033[0m"); // Black
+                  }else if(i==3&&x==7){
+                    static int inc = 0;
+                    printf("\033[30;47m       %c\033[0m",(char)65+inc); // White
+                    printf("\033[47;40m       %c\033[0m",(char)65+inc+1); // Black
+                    inc+=2;
+                  }
+                  else{
+                    printf("\033[30;47m        \033[0m"); // White
+                    printf("\033[47;40m        \033[0m"); // Black
+                  }
+                }
+                printf("\n");
+            } else {
+                for(int k = 0; k<4; k++){
+                  if(i==0 && k==0){
+                    printf("\033[47;40m%d       \033[0m", abs(x-8)); // Black
+                    printf("\033[30;47m        \033[0m"); // White
+                  }else if(i==3&&x==7){
+                    static int inc = 0;
+                    printf("\033[47;40m       %c\033[0m",(char)65+inc); // Black
+                    printf("\033[30;47m       %c\033[0m",(char)65+inc+1); // White
+                    inc+=2;
+                  }
+                  else{
+                    printf("\033[47;40m        \033[0m"); // Black
+                    printf("\033[30;47m        \033[0m"); // White
+                  }
+                }
+                printf("\n");
+            }   
+        }
   }
-  std::cout << "\n\n\n\n";
+  std::cout << "\n\n\n";
 }
-
 void Board::setValid(const bool& valid) {
   _Valid = valid;
 }

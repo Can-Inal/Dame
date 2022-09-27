@@ -5,12 +5,12 @@
 
 enum Stat : int {
   white_Dame = 0,
-  white_Stein,  // = 1 
-  white_empty, // = 2
-  invalid, // = 3
-  black_empty, // = 4
-  black_Stein, // = 5
-  black_Dame, // = 6
+  white_Stein = 1, 
+  white_empty = 2,
+  invalid = 3,
+  black_empty = 4,
+  black_Stein = 5,
+  black_Dame = 6,
 };
 
 class Piece {
