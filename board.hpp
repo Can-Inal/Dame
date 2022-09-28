@@ -26,6 +26,8 @@ class Board {
 
     std::vector<Piece> collection;
 
+    int findPiece(const int& x, const int& y, const int& color);
+
     bool getValid();
     void setValid(const bool& valid);
 

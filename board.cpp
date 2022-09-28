@@ -38,10 +38,13 @@ Board::Board(){
 
 
 void Board::PrintBoard(){
-
+  system("clear");
+  printf("\033[100m");
+  printf("\n\n\n\n\n");
   int y = 0;
   for(int x = 0; x< 8; x++){
         for(int i = 0; i<4; i++) {
+          printf("\t\t\t\t\t\t");
             if(x%2 == 0){
                 for(int k = 0; k<4; k++){
                   if(i==0 && k==0){
@@ -52,6 +55,18 @@ void Board::PrintBoard(){
                     printf("\033[30;47m       %c\033[0m",(char)65+inc); // White
                     printf("\033[47;40m       %c\033[0m",(char)65+inc+1); // Black
                     inc+=2;
+                  }else if(i==1){
+                    if(board[x][(k*2)+1] == Stat::white_Stein){
+                      printf("\033[30;47m        \033[0m"); // White
+                      printf("\033[47;40m  W(%d)  \033[0m", findPiece(x, (k*2)+1,1)); // Black
+                    }else if(board[x][(k*2)+1] == Stat::black_Stein){
+                      printf("\033[30;47m        \033[0m"); // White
+                      printf("\033[47;40m  B(%d) \033[0m", findPiece(x, (k*2)+1,0)); // Black
+                    }
+                    else {
+                      printf("\033[30;47m        \033[0m"); // White
+                      printf("\033[47;40m        \033[0m"); // Black
+                    }
                   }
                   else{
                     printf("\033[30;47m        \033[0m"); // White
@@ -69,6 +84,28 @@ void Board::PrintBoard(){
                     printf("\033[47;40m       %c\033[0m",(char)65+inc); // Black
                     printf("\033[30;47m       %c\033[0m",(char)65+inc+1); // White
                     inc+=2;
+                  }else if(i==1){
+                    if(board[x][(k*2)] == Stat::white_Stein){
+                      if(findPiece(x, k*2, 1)>=10){
+                        printf("\033[47;40m W(%d)  \033[0m", findPiece(x, k*2,1)); // Black
+                        printf("\033[30;47m        \033[0m"); // White
+                      } else {
+                        printf("\033[47;40m  W(%d)  \033[0m", findPiece(x, k*2,1)); // Black
+                        printf("\033[30;47m        \033[0m"); // White
+                      }
+                    }else if(board[x][(k*2)] == Stat::black_Stein){
+                      if(findPiece(x, k*2, 0)>10){
+                        printf("\033[47;40m  B(%d) \033[0m", findPiece(x, k*2,0)); // Black
+                        printf("\033[30;47m        \033[0m"); // White
+                      } else {
+                        printf("\033[47;40m  B(%d)  \033[0m", findPiece(x, k*2,0)); // Black
+                        printf("\033[30;47m        \033[0m"); // White
+                      }
+                    }
+                    else {
+                      printf("\033[47;40m        \033[0m"); // Black
+                      printf("\033[30;47m        \033[0m"); // White
+                    }
                   }
                   else{
                     printf("\033[47;40m        \033[0m"); // Black
@@ -87,6 +124,25 @@ void Board::setValid(const bool& valid) {
 
 bool Board::getValid() {
   return _Valid;
+}
+
+int Board::findPiece(const int &x, const int &y, const int& color){
+  int white=0;
+  int black=12;
+  if(color == 0){ //find black
+    for(; black<=23;black++){
+      if(collection[black].getX()==x && collection[black].getY()==y){
+        return black;
+      }
+    }
+  }else if(color == 1){ //find White
+    for(; white<12;white++){
+      if(collection[white].getX()==x && collection[white].getY()==y){
+        return white;
+      }
+    }
+  }
+  return white;
 }
 
 void Board::moveDame(Piece& piece, const int& xTarget, const int& yTarget, Player& white, Player& black){
